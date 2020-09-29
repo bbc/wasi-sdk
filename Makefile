@@ -91,6 +91,13 @@ build/wasi-libc.BUILT: build/llvm.BUILT
 		SYSROOT=$(BUILD_PREFIX)/share/wasi-sysroot
 	touch build/wasi-libc.BUILT
 
+build/wasi-libreb.BUILT: build/llvm.BUILT
+	$(MAKE) install -C $(ROOT_DIR)/src/rd-wasi-libreb \
+		WASM_CC=$(BUILD_PREFIX)/bin/clang \
+		WASM_AR=$(BUILD_PREFIX)/bin/llvm-ar \
+		SYSROOT=$(BUILD_PREFIX)/share/wasi-sysroot
+	touch build/wasi-libreb.BUILT
+
 build/compiler-rt.BUILT: build/llvm.BUILT
 	# Do the build, and install it.
 	mkdir -p build/compiler-rt
@@ -140,7 +147,7 @@ LIBCXX_CMAKE_FLAGS = \
 
     #-DCMAKE_STAGING_PREFIX= 
 
-build/libcxx.BUILT: build/llvm.BUILT build/compiler-rt.BUILT build/wasi-libc.BUILT
+build/libcxx.BUILT: build/llvm.BUILT build/compiler-rt.BUILT build/wasi-libc.BUILT build/wasi-libreb.BUILT
 	# Do the build.
 	mkdir -p build/libcxx
 	cd build/libcxx && cmake -G Ninja $(LIBCXX_CMAKE_FLAGS) \
