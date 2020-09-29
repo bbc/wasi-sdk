@@ -7,6 +7,6 @@
 [submodule "src/config"]
 	path = src/config
 	url = https://git.savannah.gnu.org/git/config.git
-[submodule "rd-wasi-libreb"]
-	path = rd-wasi-libreb
+[submodule "src/rd-wasi-libreb"]
+	path = src/rd-wasi-libreb
 	url = git@github.com:bbc/rd-wasi-libreb.git
